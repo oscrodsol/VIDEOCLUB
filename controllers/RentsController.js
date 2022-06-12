@@ -17,6 +17,10 @@ RentsController.getRents = (req, res) => {
 
 RentsController.postRent = async (req, res) => {
 
+    let userId = req.body.userId;
+    let filmId = req.body.filmId;
+    let payment = req.body.payment;
+
     if(userId === null || userId == "" || userId == undefined){
 
         res.send("You need to include the user id to continue");

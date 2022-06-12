@@ -8,11 +8,13 @@ const UsersController = {};
 
 UsersController.getUsers = (req, res) => {
     //Esta funcion llamada findAll es una funcion de Sequelize
+
     User.findAll()
     .then(data => {
     
         res.send(data)
     });
+
 };
 
 UsersController.postUser = async (req, res) => {
@@ -70,6 +72,16 @@ UsersController.loginUser = (req, res) => {
 
     }).catch(err => console.log(err));
 };
+
+/* UsersController.getProfile = (req, res) => {
+
+    User.findAll()
+    .then(data => {
+    
+        res.send(data)
+    });
+
+}; */
 
 //Export
 module.exports = UsersController;
