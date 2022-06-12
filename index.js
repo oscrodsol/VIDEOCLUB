@@ -8,15 +8,14 @@ const port = 3000;
 
 const db = require('./db/db');
 
-/* const router = require('./router.js'); */
+const router = require('./router.js');
 
 
 //Middlewares
 
 app.use(express.json());
 
-/* app.use(router); */
-
+app.use(router);
 
 //Conexión a base de datos y levantar servidor
 

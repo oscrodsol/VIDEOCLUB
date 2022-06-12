@@ -1,35 +1,23 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Rents', {
+    await queryInterface.createTable('Films', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+      title: {
+        type: Sequelize.STRING
       },
-      filmId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Films',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      amount: {
+      duration: {
         type: Sequelize.INTEGER
       },
-      payment: {
+      price: {
+        type: Sequelize.INTEGER
+      },
+      release_date: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -43,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Rents');
+    await queryInterface.dropTable('Films');
   }
 };

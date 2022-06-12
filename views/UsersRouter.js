@@ -7,7 +7,7 @@ const UsersController = require('../controllers/UsersController');
 
 //Endpoint-function links
 router.get('/', auth, UsersController.getUsers);
-router.post('/adduser', UsersController.postUser);
+router.post('/register', UsersController.postUser);
 router.post('/login', UsersController.loginUser);
 
 

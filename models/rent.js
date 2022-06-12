@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
   Rent.init({
     userId: DataTypes.INTEGER,
     filmId: DataTypes.INTEGER,
-    amount: DataTypes.INTEGER,
     payment: DataTypes.STRING
   }, {
     sequelize,
