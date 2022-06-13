@@ -9,11 +9,15 @@ const UsersController = {};
 UsersController.getUsers = (req, res) => {
     //Esta funcion llamada findAll es una funcion de Sequelize
 
-    User.findAll()
-    .then(data => {
-    
-        res.send(data)
-    });
+    User.findAll({
+        attributes: {
+            exclude: ['password']
+        }
+    })
+        .then(data => {
+
+            res.send(data)
+        });
 
 };
 
@@ -35,8 +39,8 @@ UsersController.postUser = async (req, res) => {
     }).catch((error) => {
         res.send(error);
     });
-    
-    
+
+
 };
 
 UsersController.loginUser = (req, res) => {
@@ -45,14 +49,14 @@ UsersController.loginUser = (req, res) => {
     let password = req.body.password;
 
     User.findOne({
-        where : {email : credentials}
+        where: { email: credentials }
 
     }).then(selectedUser => {
 
-        if(!selectedUser){
+        if (!selectedUser) {
             res.send("Incorrect User or Password");
         } else {
-            if( bcrypt.compareSync(password, selectedUser.password)){
+            if (bcrypt.compareSync(password, selectedUser.password)) {
                 //Ahora ya si hemos comprobado que el usuario existe (email es correcto) y el password SI corresponde a ese usuario
 
                 let token = jwt.sign({ user: selectedUser }, authConfig.secret, {
@@ -60,11 +64,14 @@ UsersController.loginUser = (req, res) => {
                 });
 
                 console.log(token);
-                
+
                 let loginMessage = `Welcome again ${selectedUser.name}`
                 res.json({
                     loginMessage,
-                    user: selectedUser,
+                    user: {
+                        id: selectedUser.id,
+                        name: selectedUser.name
+                    },
                     token: token
                 })
             };
