@@ -20,6 +20,15 @@ module.exports = {
       release_date: {
         type: Sequelize.STRING
       },
+      type: {
+        type: Sequelize.STRING
+      },
+      genre: {
+        type: Sequelize.STRING
+      },
+      rating: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
