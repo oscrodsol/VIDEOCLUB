@@ -27,12 +27,16 @@ UsersController.postUser = async (req, res) => {
     let age = req.body.age;
     let email = req.body.email;
     let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
+    let rol = req.body.rol;
+    let token = req.body.token;
 
     User.create({
         name: name,
         age: age,
         email: email,
-        password: password
+        password: password,
+        rol: rol,
+        token: token
     }).then(user => {
         res.send(`${user.name}, you have been added succesfully`);
 
