@@ -21,12 +21,19 @@ FilmsController.postFilm = async (req, res) => {
     let duration = req.body.duration;
     let price = req.body.price;
     let release_date = req.body.release_date;
+    let type = req.body.type;
+    let genre = req.body.genre;
+    let rating = req.body.rating;
+
     Film.create({
         
         title: title,
         duration: duration,
         price: price,
-        release_date: release_date
+        release_date: release_date,
+        type: type,
+        genre: genre,
+        rating: rating
 
     }).then(film => {
         res.send(`You have added ${film.title} succesfully to the list of films`);
@@ -36,6 +43,23 @@ FilmsController.postFilm = async (req, res) => {
     });
 
 };
+
+FilmsController.searchFilm = async (req, res) => {
+
+    let search = req.params.search;
+
+    let consulta = `SELECT films.title AS TitleFilms FROM films WHERE title LIKE "${search}";`;
+
+    let resultado = await Film.sequelize.query(consulta, {
+        type: Film.sequelize.QueryTypes.SELECT
+    });
+
+    if(resultado != 0){
+        res.send(resultado);
+    }else {
+        res.send("Tu búsqueda es estúpida y no trae nada");
+    };
+}
 
 //Export
 module.exports = FilmsController;
