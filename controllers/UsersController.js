@@ -81,15 +81,30 @@ UsersController.loginUser = (req, res) => {
     }).catch(err => console.log(err));
 };
 
-/* UsersController.getProfile = (req, res) => {
+UsersController.modifyUser= async(req,res)=>{
+   
+    let name = req.body.name;
+    let email = req.body.email;
+    let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
+    let age = req.body.age;
+    let rol = req.body.rol;
+    let id = req.body.id;
 
-    User.findAll()
-    .then(data => {
-    
-        res.send(data)
-    });
-
-}; */
+    await User.update({
+        name: name,
+        password: password,
+        email: email,
+        age: age,
+        rol: rol
+    },
+    {
+        where:{
+            id:id
+        }
+    }).then(
+        res.send(`The info on the user ${name} has been modified`)
+    ).catch(err => console.log(err));
+};
 
 //Export
 module.exports = UsersController;

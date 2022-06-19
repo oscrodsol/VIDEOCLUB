@@ -1,20 +1,17 @@
 const { Rent } = require('../models/index');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-let authConfig = require('../config/auth');
 
 //UserController object declaration
 const RentsController = {};
 
 RentsController.getRents = async (req, res) => {
-    //Esta funcion llamada findAll es una funcion de Sequelize
-    /*     Rent.findAll()
-        .then(data => {
-        
-            res.send(data)
-        }); */
 
-    let consulta = `SELECT users.name AS UserName, films.title AS TitleFilm, films.price AS FilmPrice, rents.id AS RentId
+    let consulta = `SELECT users.name AS UserName, 
+        rents.id AS RentId,
+        films.title AS TitleFilm, 
+        films.price AS RentPrice, 
+        rents.payment AS Payment,
+        rents.createdAt AS RentedAt
+
         FROM users 
         INNER JOIN rents ON users.id = rents.userId
         INNER JOIN films ON films.id = rents.filmId;`;

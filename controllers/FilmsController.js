@@ -1,7 +1,4 @@
 const { Film } = require('../models/index');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-let authConfig = require('../config/auth');
 
 //UserController object declaration
 const FilmsController = {};
