@@ -64,7 +64,7 @@ FilmsController.searchFilm = async (req, res) => {
     if(resultado != 0){
         res.send(resultado);
     }else {
-        res.send("Tu búsqueda es estúpida y no trae nada");
+        res.send(`We can't found the film ${search}`);
     };
 }
 
