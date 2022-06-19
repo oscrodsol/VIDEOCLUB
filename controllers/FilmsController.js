@@ -48,7 +48,14 @@ FilmsController.searchFilm = async (req, res) => {
 
     let search = req.params.search;
 
-    let consulta = `SELECT films.title AS TitleFilms FROM films WHERE title LIKE "${search}";`;
+    let consulta = `SELECT films.title AS TitleFilm, 
+    films.duration AS duration, 
+    films.price AS price, 
+    films.release_date AS release_date, 
+    films.type AS type, 
+    films.genre AS genre, 
+    films.rating AS rating 
+    FROM films WHERE title LIKE "${search}";`;
 
     let resultado = await Film.sequelize.query(consulta, {
         type: Film.sequelize.QueryTypes.SELECT
