@@ -106,5 +106,23 @@ UsersController.modifyUser= async(req,res)=>{
     ).catch(err => console.log(err));
 };
 
+UsersController.getUserById = async (req, res) => {
+    
+    let id = req.params.id;
+
+    let consulta = `SELECT * FROM users WHERE id LIKE ${id};`;
+
+    let resultado = await User.sequelize.query(consulta, {
+        type: User.sequelize.QueryTypes.SELECT
+    });
+
+    if(resultado != 0){
+        res.send(resultado);
+    }else {
+        res.send("We can't found the user");
+    };
+
+};
+
 //Export
 module.exports = UsersController;
